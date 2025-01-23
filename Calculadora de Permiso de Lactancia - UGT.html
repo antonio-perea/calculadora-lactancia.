@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- saved from url=(0091)file:///C:/Users/Usuario/Desktop/Calculadora%20de%20Permiso%20de%20Lactancia%20-%20UGT.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Permiso de Lactancia - UGT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .header {
+            background-color: #d62828;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #d62828;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #a81f1f;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .logo {
+            max-width: 100px;
+            margin: 0 auto 20px auto;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="file:///C:/Users/Usuario/Downloads/COLOMBUS%20(3).png" alt="Logo UGT Córdoba" class="logo">
+        <h1>Calculadora de Permiso de Lactancia</h1>
+    </div>
+    
+    <div class="container">
+        <h2>Introduce los datos para calcular:</h2>
+
+        <label for="workdays">Días trabajados:</label>
+        <input type="number" id="workdays" placeholder="Ejemplo: 70" min="1">
+
+        <label for="hours_per_day">Horas por jornada laboral:</label>
+        <input type="number" id="hours_per_day" placeholder="Ejemplo: 8" min="1">
+
+        <label for="break_per_day">Horas de permiso diario (normalmente 1):</label>
+        <input type="number" id="break_per_day" value="1" min="0.1" step="0.1">
+
+        <button onclick="calculateLactationLeave()">Calcular Permiso</button>
+
+        <div class="result" id="result">Los resultados aparecerán aquí después del cálculo.</div>
+    </div>
+
+    <div class="footer">
+        <p>Calculadora desarrollada para UGT Córdoba. Promoviendo tus derechos laborales. 🛠️👶</p>
+    </div>
+
+    <script>
+        function calculateLactationLeave() {
+            // Obtener los valores de entrada
+            const workdays = parseFloat(document.getElementById('workdays').value);
+            const hoursPerDay = parseFloat(document.getElementById('hours_per_day').value);
+            const breakPerDay = parseFloat(document.getElementById('break_per_day').value);
+
+            // Validar entradas
+            if (isNaN(workdays) || isNaN(hoursPerDay) || isNaN(breakPerDay) || workdays <= 0 || hoursPerDay <= 0 || breakPerDay <= 0) {
+                document.getElementById('result').innerHTML = "⚠️ Por favor, introduce valores válidos en todos los campos.";
+                return;
+            }
+
+            // Calcular horas acumuladas
+            const totalHours = workdays * breakPerDay;
+
+            // Calcular días completos
+            const fullDays = Math.floor(totalHours / hoursPerDay);
+
+            // Calcular horas restantes
+            const remainingHours = totalHours % hoursPerDay;
+
+            // Mostrar resultados
+            document.getElementById('result').innerHTML = `
+                <p><strong>Resultados:</strong></p>
+                <p>Total de horas acumuladas: <strong>${totalHours.toFixed(2)}</strong></p>
+                <p>Días completos acumulados: <strong>${fullDays}</strong></p>
+                <p>Horas restantes: <strong>${remainingHours.toFixed(2)}</strong></p>
+                <p>💡 Recuerda: Este cálculo está basado en los datos introducidos. Consulta con tu representante sindical para más información.</p>
+            `;
+        }
+    </script>
+
+</body></html>
